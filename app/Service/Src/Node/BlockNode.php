@@ -10,6 +10,7 @@ class BlockNode implements Node {
   private $childNodes;
 
   public function __construct(array $childNodes) {
+
     $this->childNodes = $childNodes;
     $this->show_text = true;
     foreach ($childNodes as $child) {
@@ -28,10 +29,17 @@ class BlockNode implements Node {
       return '';
     }
     $text = '';
+    $textAr =[];
     foreach ($this->childNodes as $child) {
-      $text .= $child->text();
+        $text = $child->text();
+        if (empty($text)) {
+            continue;
+        }else{
+            $textAr[]=$text;
+        }
+      /*$text .= $child->node();*/
     }
-    return $text;
+    return $textAr;
   }
 
   public function childNodes() {

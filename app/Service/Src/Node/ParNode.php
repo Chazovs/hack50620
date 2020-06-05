@@ -9,6 +9,6 @@ class ParNode extends CtrlWordNode {
   }
 
   public function text() {
-    return "\n";
+    return "";
   }
 }

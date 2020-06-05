@@ -27,23 +27,26 @@ class RtfParser
         }
 
         $scanner = new Scanner($text);
+
+
         $parser  = new Parser($scanner);
+
         $text    = '';
         $doc     = $parser->parse();
+
+
         foreach ($doc->childNodes() as $node) {
-            $text .= $node->text();
+            $texts = $node->text();
         }
 
-        if ($config['input_encoding'] === 'guess') {
-            $config['input_encoding'] = $doc->getEncoding();
-            if (is_null($config['input_encoding'])) {
-                $config['input_encoding'] = 'utf-8';
+        if ($config['input_encoding'] !== $config['output_encoding']) {
+            foreach ($texts as &$text){
+
+                $text = mb_convert_encoding($text, $config['output_encoding'], $config['input_encoding']);
             }
         }
-        if ($config['input_encoding'] !== $config['output_encoding']) {
-            $text = mb_convert_encoding($text, $config['output_encoding'], $config['input_encoding']);
-        }
-        return $text;
+
+        return $texts;
     }
 
     public function getConfig()
@@ -70,36 +73,17 @@ class RtfParser
         ];
     }
 
-    public function parseArgs(array $argv)
-    {
-
-        $opts = getopt('i:o:f:', []);
-        if (!isset($opts['f']) || !is_string($opts['f'])) {
-            return [$argv[0], null, []];
-        }
-        $config = $this->getConfig();
-        if (isset($opts['i']) && is_string($opts['i'])) {
-            $config['input_encoding'] = $opts['i'];
-        }
-        if (isset($opts['o']) && is_string($opts['o'])) {
-            $config['output_encoding'] = $opts['o'];
-        }
-        return [$argv[0], $opts['f'], $config];
-    }
-
     /**
      * @param $filename
      * @param $config
+     * @return bool|false|string|string[]|null
      */
     public function main($filename, $config)
-    {
-        /*
-        [$script, $filename, $config] = $this->parseArgs($argv);
-        if (is_null($filename)) {
-            echo "Usage: $script [-i <input encoding>] [-o <output encoding>] -f <file.rtf>\n";
-            return;
-        }*/
-        return $this->extractText($filename, $config);
+    {   $textArr = $this->extractText($filename, $config);
+        $result['text'] = $textArr;
+        $result['filename'] = $filename;
+
+        return json_encode($result);
     }
 
 }

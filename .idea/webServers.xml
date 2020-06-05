@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="c6bb6791-62e5-4be1-987f-fc40542e596c" name="remdance.myjino.ru">
+        <fileTransfer rootFolder="/home/users/r/remdance" accessType="SFTP" host="remdance.myjino.ru" port="22" sshConfigId="fd6ae882-02d6-44e4-81ae-5db2e9e10ed1" sshConfig="remdance@remdance.myjino.ru:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
