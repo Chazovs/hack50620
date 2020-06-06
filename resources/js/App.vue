@@ -7,11 +7,13 @@
 
 <script>
     import Navbar from "./components/Navbar";
+    import AddDocument from "./components/AddDocument";
 
     export default {
         name: 'App',
         components: {
-            Navbar
+            Navbar,
+            AddDocument
         }
     }
 </script>

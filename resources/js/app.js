@@ -7,6 +7,8 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import App from './App.vue';
 import router from './router';
+import 'jquery/src/jquery.js'
+import 'bootstrap/dist/js/bootstrap.min.js'
 
 Vue.component('home', require('./components/Home'))
 

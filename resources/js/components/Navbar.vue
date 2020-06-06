@@ -12,7 +12,7 @@
                        aria-label="Search">
             </form>
             <div class="nav-blocks">
-                <div class="add-document">add</div>
+                <AddDocument></AddDocument>
                 <div class="messages">Сообщения</div>
                 <div class="notifications">Уведомления</div>
                 <div class="user-block">
