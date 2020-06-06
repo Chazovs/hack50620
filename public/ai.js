@@ -1,23 +1,8 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel</title>
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
-    <link href="{{ mix('css/app.css') }}" type="text/css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet">
-   {{-- <script src="https://wagenaartje.github.io/neataptic/cdn/1.4.7/neataptic.js"></script>--}}
-    <script src="//unpkg.com/brain.js"></script>
-    <meta name="csrf-token" value="{{ csrf_token() }}"/>
-</head>
-<body>
 
-<script>
-   /* const net = new brain.NeuralNetwork(config)*/
+/*require('//unpkg.com/brain.js');*/
 
-    const net = new brain.recurrent.LSTM(); //тип сети
+
+const net = new brain.recurrent.LSTM(); //тип сети
 
     const data = [
         { input: 'Настоящая должностная инструкция определяет функциональные обязанности, права и ответственность Менеджера по персоналу.', output: 'Менеджер по персоналу' },
@@ -49,12 +34,3 @@
 
    const outputAi = net.run('ПОРЯДОК УТВЕРЖДЕНИЯ И ИЗМЕНЕНИЯ СОДЕРЖАНИЯ ДОЛЖНОСТНОЙ ИНСТРУКЦИИ'); // 'happy'
     console.log(outputAi);
-</script>
-
-<div id="app">
-    <app-component></app-component>
-</div>
-{{--<button onclick="f()">нажми</button>--}}
-<script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
-</body>
-</html>
