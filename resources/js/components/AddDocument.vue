@@ -50,10 +50,22 @@
                         }
                     }
                 ).then(function () {
-                    console.log('SUCCESS!!');
+                    Vue.$toast.open({
+                        message: "Файл успешно загружен",
+                        type: "success",
+                        duration: 5000,
+                        dismissible: true,
+                        position: "top-right"
+                    })
                 })
                  .catch(function () {
-                    console.log('FAILURE!!');
+                     Vue.$toast.open({
+                         message: "Ошибка загрузки файла",
+                         type: "error",
+                         duration: 5000,
+                         dismissible: true,
+                         position: "top-right"
+                     })
                  });
             }
         },
