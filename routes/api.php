@@ -92,10 +92,7 @@ Route::get('/big-raspars', function (Request $request) {
         $resultParsing = $pars->index3($filePath);
 
         $result = Storage::disk('local')->put($fileName.'.json', $resultParsing);
-        echo '<pre>';
-        print_r($result);
-        echo '</pre>';
-        die();
+
     }
 });
 
