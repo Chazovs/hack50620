@@ -93,7 +93,11 @@ public function extractText3(string $filename, array $config)
 
 
         foreach ($doc->childNodes() as $node) {
-            $text .= $node->text();
+          /*  echo '<pre>';
+            print_r($node->text2());
+            echo '</pre>';
+            die();*/
+            $text .= $node->text2();
         }
 
         if ($config['input_encoding'] !== $config['output_encoding']) {
