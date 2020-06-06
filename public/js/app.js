@@ -2271,7 +2271,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-dialog[data-v-0e8ba9c1] {\n    color: black;\n}\n", ""]);
+exports.push([module.i, "\n.modal-dialog[data-v-0e8ba9c1] {\n    color: black;\n}\n.result-block[data-v-0e8ba9c1] {\n    max-width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -47110,11 +47110,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _vm.result
-                  ? _c("div", { staticClass: "row" }, [
+                  ? _c("div", { staticClass: "row result-block" }, [
                       _c("div", { staticClass: "card" }, [
                         _c("div", { staticClass: "card-header" }, [
                           _vm._v(
-                            "\n                                    Должность: " +
+                            "\n                                    " +
                               _vm._s(_vm.result.type) +
                               "\n                                "
                           )
@@ -47122,6 +47122,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("div", { staticClass: "card-body" }, [
                           _c("h5", { staticClass: "card-title" }, [
+                            _c("b", [_vm._v("Должность:")]),
                             _vm._v(_vm._s(_vm.result.subtype))
                           ]),
                           _vm._v(" "),

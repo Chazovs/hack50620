@@ -19,13 +19,13 @@
                                 <input class="form-control-file" type="file" id="file" ref="file"
                                        v-on:change="handleFileUpload()"/>
                             </div>
-                            <div class="row" v-if="result">
+                            <div class="row result-block" v-if="result">
                                 <div class="card">
                                     <div class="card-header">
-                                        Должность: {{result.type}}
+                                        {{result.type}}
                                     </div>
                                     <div class="card-body">
-                                        <h5 class="card-title">{{result.subtype}}</h5>
+                                        <h5 class="card-title"><b>Должность:</b>{{result.subtype}}</h5>
                                         <p><b>Путь документа в каталоге: </b>{{result.path}}</p>
                                         <p class="card-text"><b>Тело документа: </b>{{JSON.parse(result['resultParsing'])}}</p>
                                     </div>
@@ -107,5 +107,8 @@
 <style scoped>
     .modal-dialog {
         color: black;
+    }
+    .result-block {
+        max-width: 100%;
     }
 </style>
