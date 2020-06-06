@@ -49,18 +49,28 @@
                             'Content-Type': 'multipart/form-data'
                         }
                     }
-                ).then(function () {
+                ).then(function (response) {
+                    if (response.success) {
+                        Vue.$toast.open({
+                            message: response.message,
+                            type: "success",
+                            duration: 5000,
+                            dismissible: true,
+                            position: "top-right"
+                        })
+                        return;
+                    }
                     Vue.$toast.open({
-                        message: "Файл успешно загружен",
-                        type: "success",
+                        message: response.message,
+                        type: "error",
                         duration: 5000,
                         dismissible: true,
                         position: "top-right"
                     })
                 })
-                 .catch(function () {
+                 .catch(function (err) {
                      Vue.$toast.open({
-                         message: "Ошибка загрузки файла",
+                         message: err.message,
                          type: "error",
                          duration: 5000,
                          dismissible: true,
