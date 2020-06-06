@@ -22,6 +22,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/', 'ParsingController@index');
 
+Route::get('/get-py', function (){
+   /*echo shell_exec("python -V 2>&1");*/
+    echo shell_exec("source /home/users/r/remdance/domains/hack.cofro.ru/py/env/bin/activate train.py 2>&1");
+    /*echo shell_exec("python /home/users/r/remdance/domains/hack.cofro.ru/py/train.py 2>&1");*/
+    /*return shell_exec("source /home/users/r/remdance/domains/hack.cofro.ru/py/env/bin/activate /home/users/r/remdance/domains/47h.cofro.ru/train.py 2>&1");*/
+});
+
+
 
 Route::post('/new/file', function (Request $request) {
  $content = file_get_contents(public_path('data/001.rtf'));
