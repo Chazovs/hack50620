@@ -72,7 +72,7 @@ Route::post('/new/file/with/ai', function (Request $request) {
     $resObj = json_decode($resultParsing);
 
     $client = new GuzzleHttp\Client();
-    $response = $client->request('POST', 'https://vast-sands-79590.herokuapp.com', ['text' => $resObj->text]);
+    $response = $client->request('POST', 'https://vast-sands-79590.herokuapp.com', ['json' => ['text' => $resObj->text]]);
 
     $aiResponse = $response->getBody()->getContents();
 
