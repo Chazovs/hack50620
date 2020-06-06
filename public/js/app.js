@@ -47114,7 +47114,7 @@ var render = function() {
                       _c("div", { staticClass: "card" }, [
                         _c("div", { staticClass: "card-header" }, [
                           _vm._v(
-                            "\n                                    " +
+                            "\n                                    Должность: " +
                               _vm._s(_vm.result.type) +
                               "\n                                "
                           )
@@ -47133,9 +47133,7 @@ var render = function() {
                           _c("p", { staticClass: "card-text" }, [
                             _c("b", [_vm._v("Тело документа: ")]),
                             _vm._v(
-                              _vm._s(
-                                JSON.stringify(_vm.result["resultParsing"])
-                              )
+                              _vm._s(JSON.parse(_vm.result["resultParsing"]))
                             )
                           ])
                         ])

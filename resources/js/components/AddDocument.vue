@@ -22,12 +22,12 @@
                             <div class="row" v-if="result">
                                 <div class="card">
                                     <div class="card-header">
-                                        {{result.type}}
+                                        Должность: {{result.type}}
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{result.subtype}}</h5>
                                         <p><b>Путь документа в каталоге: </b>{{result.path}}</p>
-                                        <p class="card-text"><b>Тело документа: </b>{{JSON.stringify(result['resultParsing'])}}</p>
+                                        <p class="card-text"><b>Тело документа: </b>{{JSON.parse(result['resultParsing'])}}</p>
                                     </div>
                                 </div>
 
