@@ -53,19 +53,19 @@ Route::post('/new/file', function (Request $request) {
      $contentencode = base64_encode($content);
         $file = $request->file;*/
     /*Storage::put($request->fileName, $file);*/
-   /* Storage::put('tmp.rtf', $file);
-    */
-//    $pars          = new  ParsingController;
-//    $filePath      = public_path('/app/'.$name);
-//    $resultParsing = $pars->index2($filePath);
+    /* Storage::put('tmp.rtf', $file);
+     */
+    $pars = new  ParsingController;
+    $filePath = public_path('/app/' . $name);
+    $resultParsing = $pars->index2($filePath);
 
 
     $response = [
-        'status'        => 'success',
-        'type'          => 'ДОЛЖНОСТНАЯ ИНСТРУКЦИЯ',
-        'subtype'       => 'АГРОЛЕСОМЕЛИОРАТОР',
-        'path'          => 'instructions/prof/agrolesomeliator/' . $request->fileName,
-        'resultParsing' => '$resultParsing',
+        'status' => 'success',
+        'type' => 'ДОЛЖНОСТНАЯ ИНСТРУКЦИЯ',
+        'subtype' => 'АГРОЛЕСОМЕЛИОРАТОР',
+        'path' => 'instructions/prof/agrolesomeliator/' . $request->fileName,
+        'resultParsing' => $resultParsing,
     ];
 
     return json_encode($response);
