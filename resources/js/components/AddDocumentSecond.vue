@@ -1,7 +1,7 @@
 <template>
     <div>
-        <button type="button" class="btn btn-primary add-document-button" data-toggle="modal" data-target="#addDocument"></button>
-        <div class="modal fade" id="addDocument" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        <button type="button" class="btn btn-primary add-document-button" data-toggle="modal" data-target="#addDocumentSecond"></button>
+        <div class="modal fade" id="addDocumentSecond" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -14,7 +14,7 @@
                     <div class="modal-body">
                         <div class="container">
                             <div class="form-group">
-                                <input class="form-control-file" type="file" id="file" ref="file"
+                                <input class="form-control-file" type="file" id="file-second" ref="file"
                                        v-on:change="handleFileUpload()"/>
                             </div>
                             <div class="row result-block" v-if="result">
@@ -53,6 +53,7 @@
                 let that = this;
                 let formData = new FormData();
                 formData.append('file', this.file);
+                console.log('/new/file/with/ai');
                 axios.post('/new/file/with/ai',
                     formData,
                     {

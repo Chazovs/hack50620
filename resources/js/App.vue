@@ -1,6 +1,7 @@
 <template>
     <div>
         <Navbar></Navbar>
+        <Progress></Progress>
         <router-view/>
     </div>
 </template>
@@ -9,13 +10,15 @@
     import Navbar from "./components/Navbar";
     import AddDocument from "./components/AddDocument";
     import AddDocumentSecond from "./components/AddDocumentSecond";
+    import Progress from "./components/Progress";
 
     export default {
         name: 'App',
         components: {
             Navbar,
             AddDocument,
-            AddDocumentSecond
+            AddDocumentSecond,
+            Progress
         }
     }
 </script>
