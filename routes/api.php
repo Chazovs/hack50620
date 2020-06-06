@@ -59,7 +59,7 @@ Route::post('/new/file', function (Request $request) {
 });
 
 
-Route::post('/new/file/Whith/Ai', function (Request $request) {
+Route::post('/new/file/with/ai', function (Request $request) {
 
     $name = $request->file->store('/');
 
