@@ -1,0 +1,3 @@
+[submodule "AI_part"]
+	path = AI_part
+	url = https://github.com/torcoste/leadersofdigital2020-rosatom-ner
