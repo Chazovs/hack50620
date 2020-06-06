@@ -102,3 +102,10 @@ Route::get('/big-raspars/{id}', function (Request $request, $id) {
     $fileName      = str_pad($id, 3, '0', STR_PAD_LEFT);
     return file_get_contents(public_path('/app/'.$fileName.'.json'));
 });
+
+
+Route::get('/big-raspars/{id}', function (Request $request, $id) {
+
+    $fileName      = str_pad($id, 3, '0', STR_PAD_LEFT);
+    return file_get_contents(public_path('/app/'.$fileName.'.json'));
+});
