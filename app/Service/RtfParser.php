@@ -82,7 +82,6 @@ class RtfParser
     {   $textArr = $this->extractText($filename, $config);
         $result['text'] = $textArr;
         $result['filename'] = $filename;
-
         return json_encode($result);
     }
 
