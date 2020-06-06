@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<script>
+{{--<script>
    /* const net = new brain.NeuralNetwork(config)*/
 
     const net = new brain.recurrent.LSTM(); //тип сети
@@ -49,7 +49,7 @@
 
    const outputAi = net.run('ПОРЯДОК УТВЕРЖДЕНИЯ И ИЗМЕНЕНИЯ СОДЕРЖАНИЯ ДОЛЖНОСТНОЙ ИНСТРУКЦИИ'); // 'happy'
     console.log(outputAi);
-</script>
+</script>--}}
 
 <div id="app">
     <app-component></app-component>
