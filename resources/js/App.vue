@@ -2,7 +2,16 @@
     <div>
         <Navbar></Navbar>
         <Progress></Progress>
-        <router-view/>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4">
+                    <Sidebar></Sidebar>
+                </div>
+                <div class="col-sm-8">
+                    <router-view/>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -11,6 +20,7 @@
     import AddDocument from "./components/AddDocument";
     import AddDocumentSecond from "./components/AddDocumentSecond";
     import Progress from "./components/Progress";
+    import Sidebar from "./components/Sidebar";
 
     export default {
         name: 'App',
@@ -18,7 +28,8 @@
             Navbar,
             AddDocument,
             AddDocumentSecond,
-            Progress
+            Progress,
+            Sidebar
         }
     }
 </script>
