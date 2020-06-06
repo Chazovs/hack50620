@@ -42,16 +42,16 @@ Route::post('/new/file', function (Request $request) {
 
     $name = $request->file->store('/');
 
-    $pars = new  ParsingController;
-    $filePath = public_path('/app/' . $name);
+    $pars          = new  ParsingController;
+    $filePath      = public_path('/app/' . $name);
     $resultParsing = $pars->index2($filePath);
 
 
     $response = [
-        'status' => 'success',
-        'type' => 'ДОЛЖНОСТНАЯ ИНСТРУКЦИЯ',
-        'subtype' => 'АГРОЛЕСОМЕЛИОРАТОР',
-        'path' => 'instructions/prof/agrolesomeliator/' . $request->fileName,
+        'status'        => 'success',
+        'type'          => 'ДОЛЖНОСТНАЯ ИНСТРУКЦИЯ',
+        'subtype'       => 'АГРОЛЕСОМЕЛИОРАТОР',
+        'path'          => 'instructions/prof/agrolesomeliator/' . $request->fileName,
         'resultParsing' => $resultParsing,
     ];
 
@@ -63,16 +63,16 @@ Route::post('/new/file/with/ai', function (Request $request) {
 
     $name = $request->file->store('/');
 
-    $pars = new  ParsingController;
-    $filePath = public_path('/app/' . $name);
+    $pars          = new  ParsingController;
+    $filePath      = public_path('/app/' . $name);
     $resultParsing = $pars->index3($filePath);
 
 
     $response = [
-        'status' => 'success',
-        'type' => 'ДОЛЖНОСТНАЯ ИНСТРУКЦИЯ',
-        'subtype' => 'АГРОЛЕСОМЕЛИОРАТОР',
-        'path' => 'instructions/prof/agrolesomeliator/' . $request->fileName,
+        'status'        => 'success',
+        'type'          => 'ДОЛЖНОСТНАЯ ИНСТРУКЦИЯ',
+        'subtype'       => 'АГРОЛЕСОМЕЛИОРАТОР',
+        'path'          => 'instructions/prof/agrolesomeliator/' . $request->fileName,
         'resultParsing' => $resultParsing,
     ];
 
@@ -81,9 +81,27 @@ Route::post('/new/file/with/ai', function (Request $request) {
 });
 
 
-Route::post('/big-raspars', function (Request $request) {
+Route::get('/big-raspars', function (Request $request) {
 
     for ($i = 1; $i < 709; $i++) {
+        $istr          = (string) $i;
+        $fileName      = str_pad($i, 3, '0', STR_PAD_LEFT);
+        $fileName2      = $fileName . '.rtf';
+        $filePath      = public_path('/data/' . $fileName2);
+        $pars          = new  ParsingController;
+        $resultParsing = $pars->index3($filePath);
 
+        $result = Storage::disk('local')->put($fileName.'.json', $resultParsing);
+        echo '<pre>';
+        print_r($result);
+        echo '</pre>';
+        die();
     }
+});
+
+
+Route::get('/big-raspars/{id}', function (Request $request, $id) {
+
+    $fileName      = str_pad($id, 3, '0', STR_PAD_LEFT);
+    return file_get_contents(public_path('/app/'.$fileName.'.json'));
 });
