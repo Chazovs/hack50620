@@ -56,18 +56,13 @@ class RtfParser
         if (empty($text)) {
             return '';
         }
-
         $scanner = new Scanner($text);
-
-
         $parser  = new Parser($scanner);
-
         $text    = '';
         $doc     = $parser->parse();
-
         $texts= [];
         foreach ($doc->childNodes() as $node) {
-            $texts = $node->text2();
+            $texts = $node->text();
         }
 
         if ($config['input_encoding'] !== $config['output_encoding']) {
@@ -78,6 +73,34 @@ class RtfParser
         }
 
         return $texts;
+    }
+
+public function extractText3(string $filename, array $config)
+    {
+        // Read the data from the input file.
+        $text = file_get_contents($filename);
+        if (empty($text)) {
+            return '';
+        }
+
+        $scanner = new Scanner($text);
+
+
+        $parser  = new Parser($scanner);
+
+        $text    = '';
+        $doc     = $parser->parse();
+
+
+        foreach ($doc->childNodes() as $node) {
+            $text .= $node->text();
+        }
+
+        if ($config['input_encoding'] !== $config['output_encoding']) {
+                           $text = mb_convert_encoding($text, $config['output_encoding'], $config['input_encoding']);
+        }
+
+        return $text;
     }
 
     public function getConfig()
@@ -119,6 +142,13 @@ class RtfParser
 
     public function main2($filename, $config)
     {   $textArr = $this->extractText2($filename, $config);
+        $result['text'] = $textArr;
+        $result['filename'] = $filename;
+        return json_encode($result);
+    }
+
+ public function main3($filename, $config)
+    {   $textArr = $this->extractText3($filename, $config);
         $result['text'] = $textArr;
         $result['filename'] = $filename;
         return json_encode($result);

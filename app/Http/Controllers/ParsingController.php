@@ -25,4 +25,14 @@ class ParsingController extends Controller
         $filename = $filePath;
         return $parser->main2($filename, $config);
     }
+
+    public function index3($filePath){
+        $parser = new RtfParser();
+
+        $config['input_encoding'] = 'cp1251';
+        $config['output_encoding'] = 'UTF-8';
+
+        $filename = $filePath;
+        return $parser->main3($filename, $config);
+    }
 }

@@ -65,7 +65,7 @@ Route::post('/new/file/with/ai', function (Request $request) {
 
     $pars = new  ParsingController;
     $filePath = public_path('/app/' . $name);
-    $resultParsing = $pars->index2($filePath);
+    $resultParsing = $pars->index3($filePath);
 
 
     $response = [
@@ -78,4 +78,12 @@ Route::post('/new/file/with/ai', function (Request $request) {
 
     return json_encode($response);
 
+});
+
+
+Route::post('/big-raspars', function (Request $request) {
+
+    for ($i = 1; $i < 709; $i++) {
+
+    }
 });
