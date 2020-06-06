@@ -61,11 +61,20 @@ Route::post('/new/file', function (Request $request) {
 
 Route::post('/new/file/with/ai', function (Request $request) {
 
+
+
     $name = $request->file->store('/');
 
     $pars          = new  ParsingController;
     $filePath      = public_path('/app/' . $name);
     $resultParsing = $pars->index3($filePath);
+
+    $resObj = json_decode($resultParsing);
+
+    $client = new GuzzleHttp\Client();
+    $response = $client->request('POST', 'https://vast-sands-79590.herokuapp.com', ['text' => $resObj->text]);
+
+    $aiResponse = $response->getBody()->getContents();
 
 
     $response = [
@@ -73,7 +82,7 @@ Route::post('/new/file/with/ai', function (Request $request) {
         'type'          => 'ДОЛЖНОСТНАЯ ИНСТРУКЦИЯ',
         'subtype'       => 'АГРОЛЕСОМЕЛИОРАТОР',
         'path'          => 'instructions/prof/agrolesomeliator/' . $request->fileName,
-        'resultParsing' => $resultParsing,
+        'resultParsing' => $aiResponse,
     ];
 
     return json_encode($response);
@@ -82,6 +91,9 @@ Route::post('/new/file/with/ai', function (Request $request) {
 
 
 Route::get('/big-raspars', function (Request $request) {
+
+
+
 
     for ($i = 1; $i < 709; $i++) {
         $istr          = (string) $i;

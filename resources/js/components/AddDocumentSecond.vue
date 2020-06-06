@@ -53,8 +53,8 @@
                 let that = this;
                 let formData = new FormData();
                 formData.append('file', this.file);
-                console.log('/new/file/with/ai');
-                axios.post('/new/file/with/ai',
+                console.log('/api/new/file/with/ai');
+                axios.post('/api/new/file/with/ai',
                     formData,
                     {
                         headers: {
