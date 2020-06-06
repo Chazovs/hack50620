@@ -49,6 +49,37 @@ class RtfParser
         return $texts;
     }
 
+    public function extractText2(string $filename, array $config)
+    {
+        // Read the data from the input file.
+        $text = file_get_contents($filename);
+        if (empty($text)) {
+            return '';
+        }
+
+        $scanner = new Scanner($text);
+
+
+        $parser  = new Parser($scanner);
+
+        $text    = '';
+        $doc     = $parser->parse();
+
+        $texts= [];
+        foreach ($doc->childNodes() as $node) {
+            $texts = $node->text2();
+        }
+
+        if ($config['input_encoding'] !== $config['output_encoding']) {
+            foreach ($texts as &$text){
+
+                $text = mb_convert_encoding($text, $config['output_encoding'], $config['input_encoding']);
+            }
+        }
+
+        return $texts;
+    }
+
     public function getConfig()
     {
         if (preg_match('/^Windows/', php_uname('s'))) {
@@ -80,6 +111,14 @@ class RtfParser
      */
     public function main($filename, $config)
     {   $textArr = $this->extractText($filename, $config);
+        $result['text'] = $textArr;
+        $result['filename'] = $filename;
+        return json_encode($result);
+    }
+
+
+    public function main2($filename, $config)
+    {   $textArr = $this->extractText2($filename, $config);
         $result['text'] = $textArr;
         $result['filename'] = $filename;
         return json_encode($result);

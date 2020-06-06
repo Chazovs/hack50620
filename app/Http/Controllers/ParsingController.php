@@ -23,6 +23,6 @@ class ParsingController extends Controller
         $config['output_encoding'] = 'UTF-8';
 
         $filename = $filePath;
-        return $parser->main($filename, $config);
+        return $parser->main2($filename, $config);
     }
 }
