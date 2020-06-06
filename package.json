@@ -21,6 +21,7 @@
     },
     "dependencies": {
         "bootstrap": "^4.5.0",
+        "brain.js": "^1.2.2",
         "jquery": "^3.5.1",
         "popper.js": "^1.14.3",
         "vue": "^2.6.11",

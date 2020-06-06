@@ -53,7 +53,7 @@
                 let that = this;
                 let formData = new FormData();
                 formData.append('file', this.file);
-                axios.post('/api/new/file',
+                axios.post('/new/file/with/ai',
                     formData,
                     {
                         headers: {
@@ -117,9 +117,9 @@
         height: 25px;
     }
     .add-document-button::before {
-        content: "+";
+        content: "!";
         position: relative;
         top: -6px;
-        right: 4px;
+        right: 2px;
     }
 </style>

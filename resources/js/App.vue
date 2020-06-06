@@ -8,12 +8,14 @@
 <script>
     import Navbar from "./components/Navbar";
     import AddDocument from "./components/AddDocument";
+    import AddDocumentSecond from "./components/AddDocumentSecond";
 
     export default {
         name: 'App',
         components: {
             Navbar,
-            AddDocument
+            AddDocument,
+            AddDocumentSecond
         }
     }
 </script>
