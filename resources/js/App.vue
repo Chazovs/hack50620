@@ -4,10 +4,10 @@
         <Progress></Progress>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-2 sidebar">
                     <Sidebar></Sidebar>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-10">
                     <router-view/>
                 </div>
             </div>
@@ -54,5 +54,8 @@
                 color: #42b983;
             }
         }
+    }
+    .sidebar {
+        padding: 0;
     }
 </style>
