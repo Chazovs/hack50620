@@ -8,23 +8,35 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Добавить документ</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Добавление документа</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="container">
-                            <div class="large-12 medium-12 small-12 cell">
-                                <label>File
-                                    <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-                                </label>
+                            <div class="form-group">
+                                <input class="form-control-file" type="file" id="file" ref="file"
+                                       v-on:change="handleFileUpload()"/>
+                            </div>
+                            <div class="row" v-if="result">
+                                <div class="card">
+                                    <div class="card-header">
+                                        {{result.type}}
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{result.subtype}}</h5>
+                                        <p><b>Путь документа в каталоге: </b>{{result.path}}</p>
+                                        <p class="card-text"><b>Тело документа: </b>{{JSON.stringify(result['resultParsing'])}}</p>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                            <button type="button" class="btn btn-primary" v-on:click="submitFile()">Отправить</button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <button type="button" class="btn btn-primary" v-on:click="submitFile()">Отправить</button>
                     </div>
                 </div>
             </div>
@@ -40,6 +52,7 @@
                 this.file = this.$refs.file.files[0];
             },
             submitFile() {
+                let that = this;
                 let formData = new FormData();
                 formData.append('file', this.file);
                 axios.post('/api/new/file',
@@ -50,45 +63,49 @@
                         }
                     }
                 ).then(function (response) {
-                    if (response.success) {
+                    if (response.data.status === 'success') {
                         Vue.$toast.open({
-                            message: response.message,
+                            message: 'Файл успешно загруэен',
                             type: "success",
                             duration: 5000,
                             dismissible: true,
                             position: "top-right"
                         })
-                        return;
+                        that.result = response.data;
+                    } else {
+                        Vue.$toast.open({
+                            message: 'Произошла ошибка загрузки',
+                            type: "error",
+                            duration: 5000,
+                            dismissible: true,
+                            position: "top-right"
+                        })
+                        that.result = false;
                     }
-                    Vue.$toast.open({
-                        message: response.message,
-                        type: "error",
-                        duration: 5000,
-                        dismissible: true,
-                        position: "top-right"
-                    })
                 })
-                 .catch(function (err) {
-                     Vue.$toast.open({
-                         message: err.message,
-                         type: "error",
-                         duration: 5000,
-                         dismissible: true,
-                         position: "top-right"
-                     })
-                 });
+                    .catch(function (err) {
+                        that.result = false;
+                        Vue.$toast.open({
+                            message: err,
+                            type: "error",
+                            duration: 5000,
+                            dismissible: true,
+                            position: "top-right"
+                        })
+                    });
             }
         },
         data() {
             return {
-                file: ''
+                file: '',
+                result: false
             }
         }
     }
 </script>
 
 <style scoped>
-    .modal-header {
+    .modal-dialog {
         color: black;
     }
 </style>

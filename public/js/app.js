@@ -2087,6 +2087,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddDocument",
   methods: {
@@ -2094,6 +2106,7 @@ __webpack_require__.r(__webpack_exports__);
       this.file = this.$refs.file.files[0];
     },
     submitFile: function submitFile() {
+      var that = this;
       var formData = new FormData();
       formData.append('file', this.file);
       axios.post('/api/new/file', formData, {
@@ -2101,27 +2114,29 @@ __webpack_require__.r(__webpack_exports__);
           'Content-Type': 'multipart/form-data'
         }
       }).then(function (response) {
-        if (response.success) {
+        if (response.data.status === 'success') {
           Vue.$toast.open({
-            message: response.message,
+            message: 'Файл успешно загруэен',
             type: "success",
             duration: 5000,
             dismissible: true,
             position: "top-right"
           });
-          return;
+          that.result = response.data;
+        } else {
+          Vue.$toast.open({
+            message: 'Произошла ошибка загрузки',
+            type: "error",
+            duration: 5000,
+            dismissible: true,
+            position: "top-right"
+          });
+          that.result = false;
         }
-
-        Vue.$toast.open({
-          message: response.message,
-          type: "error",
-          duration: 5000,
-          dismissible: true,
-          position: "top-right"
-        });
       })["catch"](function (err) {
+        that.result = false;
         Vue.$toast.open({
-          message: err.message,
+          message: err,
           type: "error",
           duration: 5000,
           dismissible: true,
@@ -2132,7 +2147,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      file: ''
+      file: '',
+      result: false
     };
   }
 });
@@ -2255,7 +2271,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.modal-header[data-v-0e8ba9c1] {\n    color: black;\n}\n", ""]);
+exports.push([module.i, "\n.modal-dialog[data-v-0e8ba9c1] {\n    color: black;\n}\n", ""]);
 
 // exports
 
@@ -47080,46 +47096,78 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
               _c("div", { staticClass: "container" }, [
-                _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
-                  _c("label", [
-                    _vm._v("File\n                                "),
-                    _c("input", {
-                      ref: "file",
-                      attrs: { type: "file", id: "file" },
-                      on: {
-                        change: function($event) {
-                          return _vm.handleFileUpload()
-                        }
-                      }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Отмена")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
+                _c("div", { staticClass: "form-group" }, [
+                  _c("input", {
+                    ref: "file",
+                    staticClass: "form-control-file",
+                    attrs: { type: "file", id: "file" },
                     on: {
-                      click: function($event) {
-                        return _vm.submitFile()
+                      change: function($event) {
+                        return _vm.handleFileUpload()
                       }
                     }
-                  },
-                  [_vm._v("Отправить")]
-                )
+                  })
+                ]),
+                _vm._v(" "),
+                _vm.result
+                  ? _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "card" }, [
+                        _c("div", { staticClass: "card-header" }, [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(_vm.result.type) +
+                              "\n                                "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "card-body" }, [
+                          _c("h5", { staticClass: "card-title" }, [
+                            _vm._v(_vm._s(_vm.result.subtype))
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _c("b", [_vm._v("Путь документа в каталоге: ")]),
+                            _vm._v(_vm._s(_vm.result.path))
+                          ]),
+                          _vm._v(" "),
+                          _c("p", { staticClass: "card-text" }, [
+                            _c("b", [_vm._v("Тело документа: ")]),
+                            _vm._v(
+                              _vm._s(
+                                JSON.stringify(_vm.result["resultParsing"])
+                              )
+                            )
+                          ])
+                        ])
+                      ])
+                    ])
+                  : _vm._e()
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Отмена")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.submitFile()
+                    }
+                  }
+                },
+                [_vm._v("Отправить")]
+              )
             ])
           ])
         ])
@@ -47136,7 +47184,7 @@ var staticRenderFns = [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "exampleModalLabel" } },
-        [_vm._v("Добавить документ")]
+        [_vm._v("Добавление документа")]
       ),
       _vm._v(" "),
       _c(

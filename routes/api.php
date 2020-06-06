@@ -55,17 +55,17 @@ Route::post('/new/file', function (Request $request) {
     /*Storage::put($request->fileName, $file);*/
    /* Storage::put('tmp.rtf', $file);
     */
-    $pars          = new  ParsingController;
-    $filePath      = public_path('/app/'.$name);
-    $resultParsing = $pars->index2($filePath);
+//    $pars          = new  ParsingController;
+//    $filePath      = public_path('/app/'.$name);
+//    $resultParsing = $pars->index2($filePath);
 
 
     $response = [
         'status'        => 'success',
         'type'          => 'ДОЛЖНОСТНАЯ ИНСТРУКЦИЯ',
         'subtype'       => 'АГРОЛЕСОМЕЛИОРАТОР',
-        'path'          => 'Путь в каталоге: instructions/prof/agrolesomeliator/' . $request->fileName,
-        'resultParsing' => $resultParsing,
+        'path'          => 'instructions/prof/agrolesomeliator/' . $request->fileName,
+        'resultParsing' => '$resultParsing',
     ];
 
     return json_encode($response);
