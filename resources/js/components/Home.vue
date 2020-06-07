@@ -12,9 +12,7 @@
             <div v-if="document.mustKnow && document.mustKnow.length">
                 <h5>Должен знать:</h5>
                 <ul>
-                    <li v-for="row in document.mustKnow">
-                        {{row.text}}
-                    </li>
+                    <li v-for="row in document.mustKnow" v-html="addLinks(row.text)"></li>
                 </ul>
             </div>
 
@@ -94,7 +92,7 @@
                 <h5>Связанные документы:</h5>
                 <ul>
                     <li v-for="row in document.doc">
-                        <a href="#">{{row.text}}</a>
+                        <a href="http://docs.cntd.ru/document/901969825">{{row.text}}</a>
                     </li>
                 </ul>
             </div>
@@ -111,10 +109,29 @@
         name: 'Home',
         data() {
             return {
-                document: false
+                document: false,
+                //  в дальшейнем документы будут получаться из базы,
+                //  пока что, имитируя ее, добавили несколько документов здесь
+                knownDocuments: [
+                    {
+                        title: 'Законодательство о рекламе',
+                        link: '#'
+                    },
+                    {
+                        title: 'защите прав потребителей',
+                        link: '#'
+                    },
+
+                ]
             }
         },
         methods: {
+            addLinks(text) {
+                for (let document of this.knownDocuments) {
+                    text = text.replace(document.title, `<a href="${document.link}">${document.title}</a>`);
+                }
+              return text;
+            },
             prepareDocument(document) {
                 console.log(document);
                 let preparedDocument = {
@@ -132,7 +149,6 @@
                     'organizations': [],
                 };
                 for(let row of document) {
-                    console.log(row);
                     if (row.label === 'MUST_KNOW') {
                        preparedDocument['mustKnow'].push(row)
                     }
@@ -171,6 +187,7 @@
                     }
                 }
                 this.document = preparedDocument;
+                console.log(preparedDocument);
             }
         },
         mounted() {

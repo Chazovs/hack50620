@@ -2394,17 +2394,41 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
   data: function data() {
     return {
-      document: false
+      document: false,
+      //  в дальшейнем документы будут получаться из базы,
+      //  пока что, имитируя ее, добавили несколько документов здесь
+      knownDocuments: [{
+        title: 'Законодательство о рекламе',
+        link: '#'
+      }, {
+        title: 'защите прав потребителей',
+        link: '#'
+      }]
     };
   },
   methods: {
+    addLinks: function addLinks(text) {
+      var _iterator = _createForOfIteratorHelper(this.knownDocuments),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var document = _step.value;
+          text = text.replace(document.title, "<a href=\"".concat(document.link, "\">").concat(document.title, "</a>"));
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return text;
+    },
     prepareDocument: function prepareDocument(document) {
       console.log(document);
       var preparedDocument = {
@@ -2422,13 +2446,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         'organizations': []
       };
 
-      var _iterator = _createForOfIteratorHelper(document),
-          _step;
+      var _iterator2 = _createForOfIteratorHelper(document),
+          _step2;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var row = _step.value;
-          console.log(row);
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var row = _step2.value;
 
           if (row.label === 'MUST_KNOW') {
             preparedDocument['mustKnow'].push(row);
@@ -2479,12 +2502,13 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           }
         }
       } catch (err) {
-        _iterator.e(err);
+        _iterator2.e(err);
       } finally {
-        _iterator.f();
+        _iterator2.f();
       }
 
       this.document = preparedDocument;
+      console.log(preparedDocument);
     }
   },
   mounted: function mounted() {
@@ -35027,13 +35051,9 @@ var render = function() {
                 _c(
                   "ul",
                   _vm._l(_vm.document.mustKnow, function(row) {
-                    return _c("li", [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(row.text) +
-                          "\n                "
-                      )
-                    ])
+                    return _c("li", {
+                      domProps: { innerHTML: _vm._s(_vm.addLinks(row.text)) }
+                    })
                   }),
                   0
                 )
@@ -35208,9 +35228,15 @@ var render = function() {
                   "ul",
                   _vm._l(_vm.document.doc, function(row) {
                     return _c("li", [
-                      _c("a", { attrs: { href: "#" } }, [
-                        _vm._v(_vm._s(row.text))
-                      ])
+                      _c(
+                        "a",
+                        {
+                          attrs: {
+                            href: "http://docs.cntd.ru/document/901969825"
+                          }
+                        },
+                        [_vm._v(_vm._s(row.text))]
+                      )
                     ])
                   }),
                   0
