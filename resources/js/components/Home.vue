@@ -133,7 +133,6 @@
               return text;
             },
             prepareDocument(document) {
-                console.log(document);
                 let preparedDocument = {
                     'mustKnow': [],
                     'rights': [],
@@ -187,7 +186,6 @@
                     }
                 }
                 this.document = preparedDocument;
-                console.log(preparedDocument);
             }
         },
         mounted() {
