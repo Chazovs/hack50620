@@ -2,11 +2,11 @@
     <div class="col-sm-12">
         <div v-if="document">
             <h5 v-if="document.role && document.role.length">
-                Должность: {{document.role[0]}}
+                Должность: {{document.role[0].text}}
             </h5>
 
             <h5 v-if="document.category && document.category.length">
-                Должность: {{document.category[0]}}
+                Должность: {{document.category[0].text}}
             </h5>
 
             <div v-if="document.mustKnow && document.mustKnow.length">

@@ -35004,7 +35004,7 @@ var render = function() {
             ? _c("h5", [
                 _vm._v(
                   "\n            Должность: " +
-                    _vm._s(_vm.document.role[0]) +
+                    _vm._s(_vm.document.role[0].text) +
                     "\n        "
                 )
               ])
@@ -35014,7 +35014,7 @@ var render = function() {
             ? _c("h5", [
                 _vm._v(
                   "\n            Должность: " +
-                    _vm._s(_vm.document.category[0]) +
+                    _vm._s(_vm.document.category[0].text) +
                     "\n        "
                 )
               ])
