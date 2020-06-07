@@ -81,7 +81,7 @@
                         EventBus.$emit('loaded', response.data.resultParsing);
                     } else {
                         Vue.$toast.open({
-                            message: 'Произошла ошибка загрузки',
+                            message: 'В данный момент система не может обработать файл с этой кодировкой.Попробуй другой файл',
                             type: "error",
                             duration: 5000,
                             dismissible: true,
@@ -114,7 +114,7 @@
                         that.result = response.data;
                     } else {
                         Vue.$toast.open({
-                            message: 'В данный момент, система не может обработать файл с этой кодировкой. Попробуйте другой файл',
+                            message: 'В данный момент система не может обработать файл с этой кодировкой.Попробуй другой файл',
                             type: "error",
                             duration: 5000,
                             dismissible: true,
@@ -126,7 +126,7 @@
                     .catch(function () {
                         that.result = false;
                         Vue.$toast.open({
-                            message: 'В данный момент, система не может обработать файл с этой кодировкой. Попробуйте другой файл',
+                            message: 'В данный момент система не может обработать файл с этой кодировкой.Попробуй другой файл',
                             type: "error",
                             duration: 5000,
                             dismissible: true,
