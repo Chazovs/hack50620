@@ -63,7 +63,7 @@
                 ).then(function (response) {
                     if (response.data.status === 'success') {
                         Vue.$toast.open({
-                            message: 'Файл успешно загруэен',
+                            message: 'Файл успешно загружен',
                             type: "success",
                             duration: 5000,
                             dismissible: true,

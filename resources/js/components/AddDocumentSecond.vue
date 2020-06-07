@@ -17,19 +17,6 @@
                                 <input class="form-control-file" type="file" id="file-second" ref="file"
                                        v-on:change="handleFileUpload()"/>
                             </div>
-                            <div class="row result-block" v-if="result">
-                                <div class="card">
-                                    <div class="card-header">
-                                        {{result.type}}
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title"><b>Должность:</b>{{result.subtype}}</h5>
-                                        <p><b>Путь документа в каталоге: </b>{{result.path}}</p>
-                                        <p class="card-text"><b>Тело документа: </b>{{JSON.parse(result['resultParsing'])}}</p>
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -43,6 +30,8 @@
 </template>
 
 <script>
+    import EventBus from '../event-bus';
+    import $ from 'jquery';
     export default {
         name: "AddDocument",
         methods: {
@@ -53,7 +42,6 @@
                 let that = this;
                 let formData = new FormData();
                 formData.append('file', this.file);
-                console.log('/api/new/file/with/ai');
                 axios.post('/api/new/file/with/ai',
                     formData,
                     {
@@ -64,13 +52,14 @@
                 ).then(function (response) {
                     if (response.data.status === 'success') {
                         Vue.$toast.open({
-                            message: 'Файл успешно загруэен',
+                            message: 'Файл успешно загружен',
                             type: "success",
                             duration: 5000,
                             dismissible: true,
                             position: "top-right"
-                        })
-                        that.result = response.data;
+                        });
+                        $('#addDocumentSecond').modal('hide');
+                        EventBus.$emit('loaded', response.data.resultParsing);
                     } else {
                         Vue.$toast.open({
                             message: 'Произошла ошибка загрузки',
