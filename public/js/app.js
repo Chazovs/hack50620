@@ -2072,6 +2072,9 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _event_bus__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../event-bus */ "./resources/js/event-bus.js");
 //
 //
 //
@@ -2116,11 +2119,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddDocument",
   methods: {
     handleFileUpload: function handleFileUpload() {
       this.file = this.$refs.file.files[0];
+    },
+    generatePage: function generatePage() {
+      var that = this;
+      var formData = new FormData();
+      formData.append('file', this.file);
+      axios.post('/api/new/file/with/ai', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function (response) {
+        if (response.data.status === 'success') {
+          Vue.$toast.open({
+            message: 'Файл успешно загружен',
+            type: "success",
+            duration: 5000,
+            dismissible: true,
+            position: "top-right"
+          });
+          jquery__WEBPACK_IMPORTED_MODULE_0___default()('#addDocument').modal('hide');
+          _event_bus__WEBPACK_IMPORTED_MODULE_1__["default"].$emit('loaded', response.data.resultParsing);
+        } else {
+          Vue.$toast.open({
+            message: 'Произошла ошибка загрузки',
+            type: "error",
+            duration: 5000,
+            dismissible: true,
+            position: "top-right"
+          });
+          that.result = false;
+        }
+      });
     },
     submitFile: function submitFile() {
       var that = this;
@@ -2430,7 +2471,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       return text;
     },
     prepareDocument: function prepareDocument(document) {
-      console.log(document);
       var preparedDocument = {
         'mustKnow': [],
         'rights': [],
@@ -2508,7 +2548,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       this.document = preparedDocument;
-      console.log(preparedDocument);
     }
   },
   mounted: function mounted() {
@@ -34811,7 +34850,8 @@ var render = function() {
                           _c("p", { staticClass: "card-text" }, [
                             _c("b", [_vm._v("Тело документа: ")]),
                             _vm._v(
-                              _vm._s(JSON.parse(_vm.result["resultParsing"]))
+                              _vm._s(JSON.parse(_vm.result["resultParsing"])) +
+                                "\n                                    "
                             )
                           ])
                         ])
@@ -34843,6 +34883,24 @@ var render = function() {
                   }
                 },
                 [_vm._v("Отправить")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.generatePage()
+                    }
+                  }
+                },
+                [
+                  _vm._v(
+                    "Сгенерировать\n                        страницу\n                    "
+                  )
+                ]
               )
             ])
           ])
