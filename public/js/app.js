@@ -2419,7 +2419,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var document = _step.value;
-          text = text.replace(document.title, "<a href=\"".concat(document.link, "\">").concat(document.title, "</a>"));
+          text = text.replace(document.title, "<a href=\"".concat(document.link, "\" target=\"_blank\">").concat(document.title, "</a>"));
         }
       } catch (err) {
         _iterator.e(err);

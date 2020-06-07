@@ -128,7 +128,7 @@
         methods: {
             addLinks(text) {
                 for (let document of this.knownDocuments) {
-                    text = text.replace(document.title, `<a href="${document.link}">${document.title}</a>`);
+                    text = text.replace(document.title, `<a href="${document.link}" target="_blank">${document.title}</a>`);
                 }
               return text;
             },
