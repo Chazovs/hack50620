@@ -61,9 +61,10 @@ class BlockNode implements Node
             try {
                 $node =  $child->text();
                     if(is_array($node)){
-                        $node = implode($node);
+                        $node = implode(' ', $node);
+                        continue;
                     }
-                $text .= $node;
+                $text .=  $node; //TODO нужно добавить пробел и переобучить модель
             }catch (Throwable $e){
                 throw new Exception($e->getMessage());
             }
