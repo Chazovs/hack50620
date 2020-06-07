@@ -4,6 +4,9 @@ namespace App\Service\Src\Node;
 
 // An array that stores the control words, which hides inner TextNode
 // For example, there may be a description of font or color palette etc.
+use Exception;
+use Throwable;
+
 define('DISABLE_PLAIN_TEXT', ["\\*", "\\fonttbl", "\\colortbl", "\\datastore", "\\themedata", "\\hl", "\\stylesheet", "\\nonshppict", "\\author", "\\operator"]);
 
 // '{' ~ '}'
@@ -55,8 +58,17 @@ class BlockNode implements Node
         }
         $text = '';
         foreach ($this->childNodes as $child) {
-            $text .= $child->text();
+            try {
+                $node =  $child->text();
+                    if(is_array($node)){
+                        $node = implode($node);
+                    }
+                $text .= $node;
+            }catch (Throwable $e){
+                throw new Exception($e->getMessage());
+            }
         }
+
         return $text;
     }
 
