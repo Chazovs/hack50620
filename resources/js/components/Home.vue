@@ -115,11 +115,11 @@
                 knownDocuments: [
                     {
                         title: 'Законодательство о рекламе',
-                        link: '#'
+                        link: 'http://hack.cofro.ru/app/law-on-reclame.pdf'
                     },
                     {
                         title: 'защите прав потребителей',
-                        link: '#'
+                        link: 'http://hack.cofro.ru/app/consumer-protection.pdf'
                     },
 
                 ]

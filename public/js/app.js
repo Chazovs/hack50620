@@ -2404,10 +2404,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       //  пока что, имитируя ее, добавили несколько документов здесь
       knownDocuments: [{
         title: 'Законодательство о рекламе',
-        link: '#'
+        link: 'http://hack.cofro.ru/app/law-on-reclame.pdf'
       }, {
         title: 'защите прав потребителей',
-        link: '#'
+        link: 'http://hack.cofro.ru/app/consumer-protection.pdf'
       }]
     };
   },
