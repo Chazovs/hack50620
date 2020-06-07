@@ -115,11 +115,11 @@
                 knownDocuments: [
                     {
                         title: 'Законодательство о рекламе',
-                        link: '#'
+                        link: 'http://hack.cofro.ru/app/law-on-reclame.pdf'
                     },
                     {
                         title: 'защите прав потребителей',
-                        link: '#'
+                        link: 'http://hack.cofro.ru/app/consumer-protection.pdf'
                     },
 
                 ]
@@ -128,12 +128,11 @@
         methods: {
             addLinks(text) {
                 for (let document of this.knownDocuments) {
-                    text = text.replace(document.title, `<a href="${document.link}">${document.title}</a>`);
+                    text = text.replace(document.title, `<a href="${document.link}" target="_blank">${document.title}</a>`);
                 }
               return text;
             },
             prepareDocument(document) {
-                console.log(document);
                 let preparedDocument = {
                     'mustKnow': [],
                     'rights': [],
@@ -187,7 +186,6 @@
                     }
                 }
                 this.document = preparedDocument;
-                console.log(preparedDocument);
             }
         },
         mounted() {
