@@ -1,7 +1,7 @@
 <p align="center"><img src="http://hack.cofro.ru/images/brand.png?29049a48ab599f98c28d7f1c9e2a0f39" width="40"> <h1> Leaders of digital 2020</h1></p>
 
 <p align="center">
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="http://hack.cofro.ru/">beta 0.3.1</a>
 </p>
 
 ## Разработчики
