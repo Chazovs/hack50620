@@ -2183,7 +2183,7 @@ __webpack_require__.r(__webpack_exports__);
           that.result = response.data;
         } else {
           Vue.$toast.open({
-            message: 'Произошла ошибка загрузки',
+            message: 'В данный момент, система не может обработать файл с этой кодировкой. Попробуйте другой файл',
             type: "error",
             duration: 5000,
             dismissible: true,
@@ -2191,10 +2191,10 @@ __webpack_require__.r(__webpack_exports__);
           });
           that.result = false;
         }
-      })["catch"](function (err) {
+      })["catch"](function () {
         that.result = false;
         Vue.$toast.open({
-          message: err,
+          message: 'В данный момент, система не может обработать файл с этой кодировкой. Попробуйте другой файл',
           type: "error",
           duration: 5000,
           dismissible: true,
@@ -2285,7 +2285,7 @@ __webpack_require__.r(__webpack_exports__);
           _event_bus__WEBPACK_IMPORTED_MODULE_0__["default"].$emit('loaded', response.data.resultParsing);
         } else {
           Vue.$toast.open({
-            message: 'Произошла ошибка загрузки',
+            message: 'В данный момент, система не может обработать файл с этой кодировкой. Попробуйте другой файл',
             type: "error",
             duration: 5000,
             dismissible: true,
@@ -2293,10 +2293,10 @@ __webpack_require__.r(__webpack_exports__);
           });
           that.result = false;
         }
-      })["catch"](function (err) {
+      })["catch"](function () {
         that.result = false;
         Vue.$toast.open({
-          message: err,
+          message: 'В данный момент, система не может обработать файл с этой кодировкой. Попробуйте другой файл',
           type: "error",
           duration: 5000,
           dismissible: true,
